@@ -79,9 +79,9 @@ def xml2json(xml_root: Union[Path,str], save_root: Union[Path,str]) -> None:
             write_json(labelme_info, json_f)
 
 
-def json2txt(json_root: Path, label2id: Dict[str, int], task: str ="det") -> None:
+def json2txt(json_root: Union[Path,str], label2id: Dict[str, int], task: str ="det") -> None:
     """Convert labelme to yolo format. Support detection and segmentation only."""
-
+    json_root = Path(json_root)
     for json_f in json_root.iterdir():
         if json_f.suffix == ".json":
             A = read_json(json_f)
@@ -122,7 +122,7 @@ def json2txt(json_root: Path, label2id: Dict[str, int], task: str ="det") -> Non
                 raise NotImplementedError("Support det and seg only.")
 
 
-def txt2json(root: Path, id2label: Dict[int, str]={}, task: str="det") -> None:
+def txt2json(root: Union[Path,str], id2label: Dict[int, str]={}, task: str="det") -> None:
     """Convert yolo to labelme format. Support detection and segmentation only.
 
     Args:
@@ -130,6 +130,7 @@ def txt2json(root: Path, id2label: Dict[int, str]={}, task: str="det") -> None:
         id2label (Dict, optional): _description_. Defaults to {}.
         task (str, optional): _description_. Defaults to "det".
     """
+    root = Path(root)
     images_dir = root / "images"
     labels_dir = root / "labels"
 
