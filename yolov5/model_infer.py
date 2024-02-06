@@ -72,7 +72,7 @@ def yolov5_seg_infer(model, img, conf_thres, iou_thres, device, imgsz=(640,640),
     return res
 
 
-def yolov5_det_infer(model, img, iou_thres, conf_thres, device, imgsz=(640,640), **kwargs):
+def yolov5_det_infer(model, img, conf_thres, iou_thres, device, imgsz=(640,640), **kwargs):
     
     
     raw_shape = img.shape[:2]

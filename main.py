@@ -10,7 +10,6 @@ from myutils.labelme_tools import txt2json
 device = torch.device(0)
 
 
-
 # # use yolov8-seg to seg images.
 # model = load_yolov8_model("/home/zhangqin/wangjl_data/ultralytics/runs/segment/seg_road_damege3/weights/last.pt")
 # root = Path("road_damege/Norway")
@@ -33,9 +32,9 @@ device = torch.device(0)
 # model_label.run()
 
 
-# # use yolov8-det to seg images.
-# model = load_yolov8_model("xxx.pt")
-# root = Path("road_damege/Norway")
+# use yolov8-det to det images.
+# model = load_yolov8_model("/home/zhangqin/wangjl_data/ultralytics/runs/detect/det_fallen_tree/weights/last.pt")
+# root = Path("/home/zhangqin/wangjl_data/dataset/smart_city/fallen_tree/Fallen_Trees_Improve_1-1185.v1i.yolov8/valid/images")
 # yolo2shape_params = {}
 # model_params = {
 #     "iou_thres": 0.25, 
