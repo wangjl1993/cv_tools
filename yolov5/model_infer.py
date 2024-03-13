@@ -15,6 +15,7 @@ from utils.general import (
 )
 from utils.segment.general import masks2segments, process_mask_native
 from utils.dataloaders import letterbox
+from utils.torch_utils import smart_inference_mode
 import numpy as np
 from typing import Union
 import json
@@ -41,7 +42,7 @@ def image2input(img0, imgsz, stride, device):
     return img
 
 
-
+@smart_inference_mode()
 def yolov5_seg_infer(model, img, conf_thres, iou_thres, device, imgsz=(640,640), **kwargs):
 
     raw_shape = img.shape[:2]
@@ -71,9 +72,8 @@ def yolov5_seg_infer(model, img, conf_thres, iou_thres, device, imgsz=(640,640),
    
     return res
 
-
+@smart_inference_mode()
 def yolov5_det_infer(model, img, conf_thres, iou_thres, device, imgsz=(640,640), **kwargs):
-    
     
     raw_shape = img.shape[:2]
     stride = model.stride
