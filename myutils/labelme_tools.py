@@ -73,7 +73,7 @@ def xml2json(xml_root: Union[Path,str], save_root: Union[Path,str]) -> None:
             height = int(file_size[0].getElementsByTagName("height")[0].firstChild.data)
             width = int(file_size[0].getElementsByTagName("width")[0].firstChild.data)
 
-            labelme_info = labelme_info_generator(img_filename, height, width, shapes)
+            labelme_info = labelme_info_generator(shapes, img_filename, height, width)
 
             json_f = save_root / (xml_f.stem+".json")
             write_json(labelme_info, json_f)
