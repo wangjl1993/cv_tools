@@ -48,3 +48,28 @@ def xywh2xyxy(xywh:Union[List, Tuple], imgsz: Union[List, Tuple]=None):
         pt1_y = pt1_y*H
     
     return (pt0_x, pt0_y, pt1_x, pt1_y)
+
+
+def organize_yolo_dataset_dir(root: Union[str,Path]):
+    """organize yolov5/yolov8 dataset dir.
+
+    Args:
+        root (Union[str,Path]): _description_
+    """
+    root = Path(root)
+    images_root = root / "images"
+    labels_root = root / "labels"
+    images_root.mkdir(exist_ok=True)
+    labels_root.mkdir(exist_ok=True)
+
+    for txt_f in root.iterdir():
+        if txt_f.suffix == ".txt":
+            json_f = txt_f.with_suffix(".json")
+            with open(json_f, "r") as f:
+                A = json.load(f)
+            img_suffix = Path(A["imagePath"]).suffix
+            img_f = txt_f.with_suffix(img_suffix)
+            if img_f.exists():
+                txt_f.rename(labels_root / txt_f.name)
+                img_f.rename(images_root / img_f.name)
+                json_f.rename(images_root / json_f.name)
